@@ -2,18 +2,29 @@
 
 function waitFor(element, eventName) {
   return new Promise((resolve) => {
-    element.addEventListener(eventName, () => {
+    const handleEvent = () => {
       resolve(
         `It was ${eventName} on the element: ${element.nodeName}, id: ${element.id}`,
       );
-    });
+      element.removeEventListener(eventName, handleEvent);
+    };
+
+    element.addEventListener(eventName, handleEvent);
   });
 }
 
 const printMessage = (message) => {
-  const body = document.querySelector('body');
+  const messageContainer = document.createElement('div');
 
-  body.insertAdjacentHTML('beforeend', `<div class="message">${message}</div>`);
+  messageContainer.classList.add('message-container');
+  document.body.appendChild(messageContainer);
+
+  const messageEl = document.createElement('div');
+
+  messageEl.classList.add('message');
+  messageEl.textContent = message;
+
+  messageContainer.appendChild(messageEl);
 };
 
 const loginField = document.getElementById('login');
