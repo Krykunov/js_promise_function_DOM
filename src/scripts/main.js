@@ -13,12 +13,12 @@ function waitFor(element, eventName) {
   });
 }
 
+const messageContainer = document.createElement('div');
+
+messageContainer.classList.add('message-container');
+document.body.appendChild(messageContainer);
+
 const printMessage = (message) => {
-  const messageContainer = document.createElement('div');
-
-  messageContainer.classList.add('message-container');
-  document.body.appendChild(messageContainer);
-
   const messageEl = document.createElement('div');
 
   messageEl.classList.add('message');
